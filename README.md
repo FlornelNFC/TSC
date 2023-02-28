@@ -17,3 +17,5 @@ mkdir
 4) git config --global credential.helper store
 
 git status
+
+5) ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
