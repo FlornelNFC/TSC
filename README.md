@@ -16,3 +16,4 @@ mkdir
 
 4) git config --global credential.helper store
 
+git status
