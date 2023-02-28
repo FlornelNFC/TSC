@@ -14,3 +14,5 @@ mkdir
 3) To check the configuration, run:
 	git config --global --list
 
+4) git config --global credential.helper store
+
