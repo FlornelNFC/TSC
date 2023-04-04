@@ -17,7 +17,7 @@ package instr_register_pkg;
   } opcode_t;
 
   typedef logic signed [31:0] operand_t;
-  typedef logic signed [63:0] operand_res; /*rezultat_t*/
+  typedef logic [63:0] rezultat_t;
   
   typedef logic [4:0] address_t;
   
@@ -25,7 +25,9 @@ package instr_register_pkg;
     opcode_t  opc;
     operand_t op_a;
     operand_t op_b;
-    operand_res rezultat;
+    rezultat_t rez;
   } instruction_t;
+
+ 
 
 endpackage: instr_register_pkg

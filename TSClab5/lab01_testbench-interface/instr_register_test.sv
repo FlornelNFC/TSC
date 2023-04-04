@@ -16,10 +16,35 @@ module instr_register_test
    output address_t      write_pointer,
    output address_t      read_pointer,
    input  instruction_t  instruction_word
+   //output reg [3:0] rand_out
   );
 
   timeunit 1ns/1ns;
+  //reg [3:0] my_list [2:0] = '{4'b0101, 4'b0111, 4'b1011};
+  //int index = $unsigned($urandom())%3;
+  //parameter Number_of_Transaction = my_list[index];
+  //parameter Number_of_Transaction = 11;
 
+  // generate
+  //   if ($urandom() % 3 == 0) begin
+  //     parameter Number_of_Transaction = 5;
+  //   end else if ($urandom() % 3 == 1) begin
+  //     parameter Number_of_Transaction = 7;
+  //   end else begin
+  //     parameter Number_of_Transaction = 11;
+  //   end
+  // endgenerate
+
+  parameter Number_of_Transaction = 11;
+  parameter RND_CASE = 2;
+    /***
+  LEGENDA RND_CASE:
+  Valoare:
+            0: write_pointer -> incremental, read_pointer -> incremental
+            1: write_pointer -> incremental, read_pointer -> random
+            2: write_pointer -> random, read_pointer -> incremental
+            3: write_pointer -> random, read_pointer -> random
+  *///
   int seed = 555;
 
   initial begin
@@ -39,7 +64,7 @@ module instr_register_test
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
-    repeat (3) begin
+    repeat (Number_of_Transaction) begin
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
     end
@@ -47,12 +72,19 @@ module instr_register_test
 
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    for (int i=0; i<=2; i++) begin
+    for (int i=0; i<Number_of_Transaction; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
-      @(posedge clk) read_pointer = i;
-      @(negedge clk) print_results;
+     
+    case (RND_CASE)
+      0,2: read_pointer = read_pointer + 1; 
+      1,3: read_pointer = $unsigned($urandom()) % 32; 
+      default: read_pointer = read_pointer + 1; 
+    endcase
+
+		@(negedge clk) print_results;
+	
     end
 
     @(posedge clk) ;
@@ -72,14 +104,16 @@ module instr_register_test
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
     //
-    static int temp = 0;
+    case (RND_CASE)
+      0, 1: write_pointer = write_pointer + 1;
+      2, 3: write_pointer = $unsigned($urandom()) % 32; 
+      default: write_pointer = write_pointer + 1; 
+    endcase
+   
     operand_a     <= $random(seed)%16;                 // between -15 and 15
-    operand_b     <= $unsigned($random)%16;            // between 0 and 15  
+    operand_b     <= $unsigned($random)%16;            // between 0 and 15
     opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
     
-    
-
-    write_pointer <= temp++;
   endfunction: randomize_transaction
 
   function void print_transaction;
@@ -94,7 +128,7 @@ module instr_register_test
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
     $display("  operand_a = %0d",   instruction_word.op_a);
     $display("  operand_b = %0d", instruction_word.op_b);
-    $display("  rezultat = %0d\n", instruction_word.rezultat);
+	  $display("  res = %0d", instruction_word.rez);
   endfunction: print_results
 
 endmodule: instr_register_test

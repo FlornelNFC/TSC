@@ -1,0 +1,170 @@
+# Reading D:/modelsim/modeltech/tcl/vsim/pref.tcl
+# do run.do
+# 1
+# Model Technology ModelSim Microsemi vlog 10.5c Compiler 2016.07 Jul 21 2016
+# Start time: 20:31:21 on Apr 04,2023
+# vlog -reportprogress 300 -sv -timescale 1ps/1ps -work work -f sources.txt 
+# -- Compiling package instr_register_pkg
+# -- Compiling module instr_register
+# -- Importing package instr_register_pkg
+# -- Compiling module instr_register_test
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 20:31:21 on Apr 04,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top 
+# Start time: 20:31:21 on Apr 04,2023
+# //  ModelSim Microsemi 10.5c Jul 21 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim Microsemi and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# 
+# 
+# ***********************************************************
+# ***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# Reseting the instruction register...
+# 
+# Writing values to register stack...
+# Writing to register location 23: 
+#   opcode = 1 (PASSA)
+#   operand_a = -12
+#   operand_b = 7
+# 
+# Writing to register location 17: 
+#   opcode = 0 (ZERO)
+#   operand_a = -9
+#   operand_b = 1
+# 
+# Writing to register location 9: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+# 
+# Writing to register location 25: 
+#   opcode = 5 (MULT)
+#   operand_a = -8
+#   operand_b = 7
+# 
+# Writing to register location 0: 
+#   opcode = 3 (ADD)
+#   operand_a = -9
+#   operand_b = 5
+# 
+# Writing to register location 31: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 3
+# 
+# Writing to register location 21: 
+#   opcode = 3 (ADD)
+#   operand_a = 3
+#   operand_b = 12
+# 
+# Writing to register location 28: 
+#   opcode = 6 (DIV)
+#   operand_a = 12
+#   operand_b = 3
+# 
+# Writing to register location 7: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 14
+# 
+# Writing to register location 10: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+# 
+# Writing to register location 23: 
+#   opcode = 7 (MOD)
+#   operand_a = 9
+#   operand_b = 9
+# 
+# 
+# Reading back the same register locations written...
+# Read from register location 0: 
+#   opcode = 3 (ADD)
+#   operand_a = -9
+#   operand_b = 5
+#   res = 18446744073709551612
+# Read from register location 1: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 2: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 3: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 4: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 5: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 6: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 7: 
+#   opcode = 1 (PASSA)
+#   operand_a = 3
+#   operand_b = 14
+#   res = 3
+# Read from register location 8: 
+#   opcode = 0 (ZERO)
+#   operand_a = 0
+#   operand_b = 0
+#   res = 0
+# Read from register location 9: 
+#   opcode = 7 (MOD)
+#   operand_a = -15
+#   operand_b = 8
+#   res = 18446744073709551609
+# Read from register location 10: 
+#   opcode = 1 (PASSA)
+#   operand_a = -2
+#   operand_b = 9
+#   res = 18446744073709551614
+# 
+# ***********************************************************
+# ***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***
+# ***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***
+# ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
+# ***********************************************************
+# 
+# ** Note: $finish    : ../../TSClab5/lab01_testbench-interface/instr_register_test.sv(96)
+#    Time: 256 ns  Iteration: 1  Instance: /top/test
+# 1
+# Break in Module instr_register_test at ../../TSClab5/lab01_testbench-interface/instr_register_test.sv line 96
+# Simulation Breakpoint: 1
+# Break in Module instr_register_test at ../../TSClab5/lab01_testbench-interface/instr_register_test.sv line 96
+# MACRO ./run.do PAUSED at line 46
+# End time: 20:31:45 on Apr 04,2023, Elapsed time: 0:00:24
+# Errors: 0, Warnings: 0
