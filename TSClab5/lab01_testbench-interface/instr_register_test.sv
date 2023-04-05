@@ -36,7 +36,8 @@ module instr_register_test
   // endgenerate
 
   parameter Number_of_Transaction = 11;
-  parameter RND_CASE = 2;
+  parameter RND_CASE = 3;
+  parameter testName = "empty";
     /***
   LEGENDA RND_CASE:
   Valoare:
@@ -45,7 +46,7 @@ module instr_register_test
             2: write_pointer -> random, read_pointer -> incremental
             3: write_pointer -> random, read_pointer -> random
   *///
-  int seed = 555;
+  parameter seed = 555;
 
   initial begin
     $display("\n\n***********************************************************");
@@ -93,6 +94,7 @@ module instr_register_test
     $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
+    $display("Nume test: %0s ", testName);
     $finish;
   end
 
@@ -130,5 +132,7 @@ module instr_register_test
     $display("  operand_b = %0d", instruction_word.op_b);
 	  $display("  res = %0d", instruction_word.rez);
   endfunction: print_results
+
+  
 
 endmodule: instr_register_test

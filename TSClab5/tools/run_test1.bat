@@ -1,0 +1,1 @@
+call run_test.bat 101 0 555 gui %0
