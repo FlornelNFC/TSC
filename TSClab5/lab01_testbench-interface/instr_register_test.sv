@@ -171,6 +171,13 @@ module instr_register_test
         end
   endfunction: CheckResults
 
+  // covergroup cov_grp @(posedge clk);
+  //   cov_p1: coverpoint instruction_word.op_a;
+  //   cov_p2: coverpoint instruction_word.op_b;
+  //   cov_p3: coverpoint instruction_word.opc;
+  // endgroup
+  // cov_grp cov_inst = new();
+
   
 
 endmodule: instr_register_test
