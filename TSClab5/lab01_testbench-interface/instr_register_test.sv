@@ -35,9 +35,10 @@ module instr_register_test
   //   end
   // endgenerate
 
-  parameter Number_of_Transaction = 11;
-  parameter RND_CASE = 3;
-  parameter testName = "empty";
+  parameter Number_of_Transaction;
+  parameter RND_CASE;
+  parameter testName;
+  integer errorCounter = 0;
     /***
   LEGENDA RND_CASE:
   Valoare:
@@ -85,6 +86,7 @@ module instr_register_test
     endcase
 
 		@(negedge clk) print_results;
+    CheckResults(instruction_word, opcode, operand_a, operand_b);
 	
     end
 
@@ -94,7 +96,15 @@ module instr_register_test
     $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
-    $display("Nume test: %0s ", testName);
+    $display("Nume test: %0s\n", testName);
+    $display("Erori: %0d\n", errorCounter);
+    if (errorCounter == 0) begin
+      $display ("Sequence status: PASSED");
+    end else begin
+      $display("Sequence status: FAILED");
+    end
+
+    
     $finish;
   end
 
@@ -106,15 +116,18 @@ module instr_register_test
     // addresses of 0, 1 and 2.  This will be replaceed with randomizeed
     // write_pointer values in a later lab
     //
+
     case (RND_CASE)
       0, 1: write_pointer = write_pointer + 1;
       2, 3: write_pointer = $unsigned($urandom()) % 32; 
       default: write_pointer = write_pointer + 1; 
     endcase
-   
+
     operand_a     <= $random(seed)%16;                 // between -15 and 15
     operand_b     <= $unsigned($random)%16;            // between 0 and 15
     opcode        <= opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+
+
     
   endfunction: randomize_transaction
 
@@ -132,6 +145,31 @@ module instr_register_test
     $display("  operand_b = %0d", instruction_word.op_b);
 	  $display("  res = %0d", instruction_word.rez);
   endfunction: print_results
+
+  function void CheckResults (instruction_t Thisinstruction_word, opcode_t Thisopcode, operand_t Thisoperand_a, operand_t Thisoperand_b);
+        rezultat_t expectedResult;
+
+        case (Thisinstruction_word.opc)
+          ADD: expectedResult = Thisoperand_a + Thisoperand_b;
+          SUB: expectedResult = Thisoperand_a - Thisoperand_b;
+          MULT: expectedResult = Thisoperand_a * Thisoperand_b;
+          PASSA: expectedResult = Thisoperand_a;
+          PASSB: expectedResult = Thisoperand_b;
+          DIV: expectedResult = Thisoperand_a / Thisoperand_b;
+          MOD: expectedResult = Thisoperand_a % Thisoperand_b;
+          default: expectedResult = 0;
+        endcase
+
+        $display("  Expected Result: %0d", expectedResult);
+        $display("  Actual Result: %0d\n", Thisinstruction_word.rez);
+
+        if (expectedResult == Thisinstruction_word.rez) begin
+          $display("Current test status: PASSED\n\n");
+        end else begin
+          $display("Current test status: FAILED\n\n");
+          errorCounter++;
+        end
+  endfunction: CheckResults
 
   
 

@@ -27,16 +27,15 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
   always@(posedge clk, negedge reset_n)   // write into register
     if (!reset_n) begin
       foreach (iw_reg[i])
-        iw_reg[i] = '{opc:ZERO,default:0};  // reset to all zeros
+        iw_reg[i] = '{opc:ZERO, op_a:0, op_b:0, rez:0};  // reset to all zeros
     end
     else if (load_en) begin
       case(opcode)
-        ZERO:rez = 0;
         PASSA: rez = operand_a;
         PASSB: rez = operand_b;
         ADD: rez = operand_a + operand_b;
         SUB: rez = operand_a - operand_b;
-        MULT: rez = operand_a * operand_b;
+        MULT: rez = operand_a - operand_b;
         DIV: rez = operand_a/operand_b;
         MOD: rez = operand_a%operand_b;
         default: rez = 0;
